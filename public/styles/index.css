@@ -1,0 +1,102 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+div, p, span {
+  box-sizing: border-box;
+}
+
+.form {
+  padding: 3rem 37rem;
+}
+
+.food_list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.food_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.weight {
+  width: 50px;
+  text-align: right;
+}
+
+.weight::-webkit-outer-spin-button,
+.weight::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form_buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.add {
+  height: 20px;
+  width: 20px;
+}
+
+.result {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.nutrient_list {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 10px;
+  border: 1px solid gray;
+  border-radius: 2%;
+  width: 300px;
+}
+
+.nutrient_info {
+  width: 100%;
+  border-bottom: 1px dotted gray;
+  padding-bottom: 10px;
+}
+
+.nutrient {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.hide {
+  display: none !important;
+}
+
+.extra_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.show_more img {
+  height: 15px;
+  weight: 15px;
+}

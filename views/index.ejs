@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website</title>
+</head>
+<link rel="stylesheet" href="styles/index.css">
+<body>
+  <div class="form">
+    <form action="/" method="POST">
+      <input type="hidden" name="n_queries" class="n_queries" value="1">
+      <div class="food_list">
+        <div id="fr1" class="food_row">
+          <input type="text" name="q1" id="q1" class="query" placeholder="Food name">
+          <input type="number" name="w1" id="w1" class="weight" placeholder="0">
+          <select name="u1" id="u1" class="unit">
+            <option value="g">g</option>
+            <option value="kg">kg</option>
+            <option value="qty">quantity</option>
+          </select>
+        </div>
+      </div>
+      <div class="form_buttons">
+        <img src="images/plus.png" alt="add" class="add">
+        <input type="submit" value="Search">
+      </div>
+    </form>
+  </div>
+  <% if (locals.error) { %>
+    <%= error %>
+  <% } %>
+  <% if (locals.foods) { %>
+    <div class="result">
+      <div class="nutrient_list">
+      <% foods.forEach((food, index) => { %>
+        <% food.forEach((nutrients) => { %>
+          <% var first_character = nutrients.food_name.charAt(0).toUpperCase(); %>
+          <% var food_name = first_character + nutrients.food_name.slice(1); %>
+          <div id="nutrient_<%= index %>" class="nutrient_info" onClick="createCalorieChart('<%= food_name %>', <%= nutrients.nf_total_carbohydrate %>, <%= nutrients.nf_protein %>, <%= nutrients.nf_total_fat %>)">
+            <div class="nutrient">
+              <div id="food_name_<%= index %>" class="food_name"><strong><%= food_name %></strong> <%= nutrients.nf_calories %>kcal</div>
+              <div id="sm_<%= index %>" class="show_more">
+                <img src="images/expand.png" alt="show_more">
+              </div>
+            </div>
+            <div id="extra_info_<%= index %>" class="extra_info hide">
+              <div class="nutrient">
+                <div class="nutrient_label">&ensp;Proteins:</div><div class="nutrient_value"><%= nutrients.nf_protein %>g</div>
+              </div>
+              <div class="nutrient">
+                <div class="nutrient_label">&ensp;Fats:</div><div class="nutrient_value"><%= nutrients.nf_total_fat %>g</div>
+              </div>
+              <div class="nutrient">
+                <div class="nutrient_label">&ensp;&ensp;of which saturated fats:</div><div class="nutrient_value"><%= nutrients.nf_saturated_fat %>g</div>
+              </div>
+              <div class="nutrient">  
+                <div class="nutrient_label">&ensp;Carbohydrates:</div><div class="nutrient_value"><%= nutrients.nf_total_carbohydrate %>g</div>
+              </div>
+              <div class="nutrient">
+                <div class="nutrient_label">&ensp;&ensp;of which sugars:</div><div class="nutrient_value"><%= nutrients.nf_sugars %>g</div>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      <% }); %>
+      </div>
+      <div id="pieChart"></div>
+    </div>
+  <% } %>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+  <script src="js/script.js"></script>
+  <% if(locals.foods) { %>
+    <script>
+      <% var total = locals.foods[foods.length-1][0]; %>
+      createCalorieChart("<%= total.food_name %>", <%= total.nf_total_carbohydrate %>, <%= total.nf_protein %>, <%= total.nf_total_fat %>)
+    </script>
+  <% } %>  
+ </body>
+</html>
